@@ -24,4 +24,19 @@ server.post("/sing-up", (req, res) => {
     res.status(201).send("Usuário criado com sucesso")
 })
 
+server.post("/tweets", (req, res) => {
+    const dadosTweet = req.body
+
+    const buscarUsuarioCadastrado = usuarios.find(item => item.username === dadosTweet.username)
+
+    if (!buscarUsuarioCadastrado) return res.sendStatus(401)
+
+    tweets.push(dadosTweet)
+    
+    console.log(tweets)
+
+    res.status(201).send("Tweet criado com sucesso")
+
+})
+
 server.listen(PORT, () => { console.log(`Servidor está funcionando na porta ${PORT}`) })
